@@ -94,6 +94,9 @@ $RCLONE --config "$S3_CONF" sync "$HERMES_HOME" "hermes-s3:${S3_BUCKET}/${DEST}"
   --exclude "home/.local/**" \
   --exclude "home/.rustup/**" \
   --exclude "home/.cargo/**" \
+  --exclude "bin/rclone" \
+  --exclude "bin/tirith" \
+  --exclude "home/hermes-backup-*.zip" \
   --exclude ".npm/_npx/**" \
   --exclude "audio_cache/**" \
   --exclude "image_cache/**" \
