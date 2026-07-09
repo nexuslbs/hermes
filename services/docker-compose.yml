@@ -94,6 +94,8 @@ services:
     container_name: hermes-cadvisor
     restart: unless-stopped
     privileged: true
+    command:
+      - "--docker_only"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
