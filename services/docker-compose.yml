@@ -43,8 +43,16 @@ services:
     depends_on:
       - loki
     mem_limit: 500M
+    # CRITICAL: must NOT use the journald driver. Vector's console sink writes
+    # every processed log to stdout; with the journald driver that output
+    # re-enters the journald source -> infinite amplification loop (observed
+    # 2026-08-13: /var/log/syslog grew to 88GB in ~2 days, 2.7MB/s). json-file
+    # keeps vector's own output OUT of the journald source.
     logging:
-      driver: journald
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "3"
 
   loki:
     container_name: hermes-loki
